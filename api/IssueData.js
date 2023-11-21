@@ -35,20 +35,20 @@ const updateIssue = (issueId, payload) => new Promise((resolve, reject) => {
 
 // Get all issues
 const getAllIssues = () => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/issue`, {
+  fetch(`${clientCredentials.databaseURL}/api/issue`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => response)
-    .then((data) => resolve(Object.values(data)))
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
     .catch(reject);
 });
 
 // Delete an Issue
 const deleteIssue = (issueId) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/issue/${issueId}.json`, {
+  fetch(`${clientCredentials.databaseURL}/api/issue/${issueId}.json`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

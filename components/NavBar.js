@@ -17,7 +17,7 @@ export default function App() {
   return (
     <MDBNavbar expand="lg" light bgColor="light">
       <MDBContainer fluid>
-        <MDBNavbarBrand href="#">Navbar</MDBNavbarBrand>
+        <MDBNavbarBrand href="/">TracIT</MDBNavbarBrand>
         <MDBNavbarToggler
           type="button"
           aria-expanded="false"
@@ -34,7 +34,7 @@ export default function App() {
               </MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
-              <MDBNavbarLink href="/issues/Issues">Issues</MDBNavbarLink>
+              <MDBNavbarLink href="/issues/IssuesPage">Issues</MDBNavbarLink>
             </MDBNavbarItem>
             <MDBNavbarItem>
               <MDBNavbarLink href="/">Project Team</MDBNavbarLink>
