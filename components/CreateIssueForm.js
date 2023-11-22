@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { createIssue, updateIssue } from '../api/IssueData';
 
 function CreateIssueForm({ obj }) {
-  const [formData, setFormData] = useState();
+  const [formData, setFormData] = useState([]);
   const router = useRouter();
 
   const handleSubmit = (e) => {
@@ -48,7 +48,7 @@ function CreateIssueForm({ obj }) {
           onChange={handleChange}
         />
       </Form.Group>
-      <Button type="submit">Submit Issue</Button>
+      <Button type="submit">{obj?.issueId ? 'Update' : 'Create'} Issue</Button>
     </Form>
   );
 }

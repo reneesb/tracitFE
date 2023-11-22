@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import PropTypes from 'prop-types';
 import {
   MDBTable, MDBTableHead, MDBTableBody, MDBBtn, MDBBadge,
 } from 'mdb-react-ui-kit';
@@ -31,7 +33,9 @@ function IssuesPage() {
               <td>{result?.title}</td>
               <td><h6><MDBBadge className="ms-2">{result?.status}</MDBBadge></h6></td>
               <td>{result?.dateTimeCreated}</td>
-              <td><MDBBtn color="link">View</MDBBtn></td>
+              <Link href={`/issues/${result.issueId}`} passHref>
+                <td><MDBBtn color="link">View</MDBBtn></td>
+              </Link>
             </>
           ))}
 
@@ -40,5 +44,16 @@ function IssuesPage() {
     </div>
   );
 }
+
+IssuesPage.propTypes = {
+  issueObj: PropTypes.shape({
+    issueId: PropTypes.string,
+    title: PropTypes.string,
+    status: PropTypes.string,
+    dateTimeCreated: PropTypes.instanceOf(Date),
+
+  }).isRequired,
+
+};
 
 export default IssuesPage;

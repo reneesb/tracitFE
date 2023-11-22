@@ -46,6 +46,19 @@ const getAllIssues = () => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// Get single issue
+const getSingleIssue = (issueId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/api/issue/${issueId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve((data)))
+    .catch(reject);
+});
+
 // Delete an Issue
 const deleteIssue = (issueId) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/api/issue/${issueId}.json`, {
@@ -64,4 +77,5 @@ export {
   updateIssue,
   getAllIssues,
   deleteIssue,
+  getSingleIssue,
 };
