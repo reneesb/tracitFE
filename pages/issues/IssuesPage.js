@@ -4,14 +4,17 @@ import PropTypes from 'prop-types';
 import {
   MDBTable, MDBTableHead, MDBTableBody, MDBBtn, MDBBadge,
 } from 'mdb-react-ui-kit';
+import { useRouter } from 'next/router';
 import { getAllIssues } from '../../api/IssueData';
 
 function IssuesPage() {
   const [results, setResults] = useState();
+  const router = useRouter();
+  const { issueId } = router.query;
 
   useEffect(() => {
     getAllIssues().then((data) => setResults(data));
-  }, []);
+  }, [issueId]);
 
   return (
     <div>
@@ -33,7 +36,7 @@ function IssuesPage() {
               <td>{result?.title}</td>
               <td><h6><MDBBadge className="ms-2">{result?.status}</MDBBadge></h6></td>
               <td>{result?.dateTimeCreated}</td>
-              <Link href={`/issues/${result.issueId}`} passHref>
+              <Link href="/issues/viewissue" passHref>
                 <td><MDBBtn color="link">View</MDBBtn></td>
               </Link>
             </>

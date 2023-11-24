@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
 import React, { useState, useEffect } from 'react';
+
 import { getSingleIssue } from '../../api/IssueData';
+import IssueCard from '../../components/IssueCard';
 
 function ViewIssue() {
   const [detail, setDetail] = useState([]);
@@ -9,14 +11,11 @@ function ViewIssue() {
 
   useEffect(() => {
     getSingleIssue(issueId).then(setDetail);
-  }, []);
+  }, [issueId]);
 
   return (
-    <div>
-      <h2>View Issue</h2>
-      <h3>{detail.issueId}</h3>
-      <p>{detail.title}</p>
-    </div>
+    <IssueCard obj={detail} />
+
   );
 }
 
