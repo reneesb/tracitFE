@@ -6,6 +6,9 @@ import { getAllIssues } from '../../api/IssueData';
 
 function ViewIssues() {
   const [issues, setIssues] = useState([]);
+  const onUpdate = () => {
+    getAllIssues().then(setIssues);
+  };
 
   useEffect(() => {
     getAllIssues().then(setIssues);
@@ -16,7 +19,7 @@ function ViewIssues() {
         <MDBBtn className="mt-5 mb-2">Create Issue</MDBBtn>
       </Link>
       {issues?.map((issue) => (
-        <IssueCard key={issue.issueId} issueObj={issue} />
+        <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
       ))}
     </div>
   );
