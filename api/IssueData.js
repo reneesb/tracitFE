@@ -61,7 +61,7 @@ const getSingleIssue = (issueId) => new Promise((resolve, reject) => {
 
 // Delete an Issue
 const deleteIssue = (issueId) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/api/issue/${issueId}.json`, {
+  fetch(`${clientCredentials.databaseURL}/api/issue/${issueId}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

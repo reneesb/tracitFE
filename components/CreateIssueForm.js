@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { createIssue, updateIssue } from '../api/IssueData';
@@ -11,7 +11,7 @@ function CreateIssueForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj?.issueId) {
-      updateIssue(formData).then(() => router.push('/issues/viewissues'));
+      updateIssue(obj?.issueId, formData).then(() => router.push('/issues/viewissues'));
     } else {
       const payload = { ...formData };
       createIssue(payload).then(() => router.push('/issues/viewissues'));
@@ -25,6 +25,16 @@ function CreateIssueForm({ obj }) {
       [name]: value,
     }));
   };
+
+  useEffect(() => {
+    if (obj?.issueId) {
+      setFormData((prev) => ({
+        ...prev,
+        title: obj?.title,
+        description: obj?.description,
+      }));
+    }
+  }, [obj]);
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
