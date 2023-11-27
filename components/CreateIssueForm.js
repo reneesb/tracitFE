@@ -11,10 +11,10 @@ function CreateIssueForm({ obj }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (obj?.issueId) {
-      updateIssue(formData).then(() => router.push('/issues/IssuesPage'));
+      updateIssue(formData).then(() => router.push('/issues/viewissues'));
     } else {
       const payload = { ...formData };
-      createIssue(payload).then(() => router.push('/issues/IssuesPage'));
+      createIssue(payload).then(() => router.push('/issues/viewissues'));
     }
   };
 
