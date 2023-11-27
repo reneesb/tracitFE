@@ -1,19 +1,9 @@
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { getSingleIssue } from '../../../api/IssueData';
-import CreateIssueForm from '../../../components/CreateIssueForm';
+import React from 'react'
 
-function EditIssue() {
-  const [issue, setIssue] = useState([]);
-  const router = useRouter();
-  const { issueId } = router.query;
-
-  useEffect(() => {
-    getSingleIssue().then(setIssue);
-  }, [issueId]);
+function ViewSingleIssue() {
   return (
-    <CreateIssueForm obj={issue} />
+    <div>ViewSingleIssue</div>
   );
 }
 
-export default EditIssue;
+export default ViewSingleIssue;
