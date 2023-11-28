@@ -16,13 +16,16 @@ function IssueCard({ issueObj, onUpdate }) {
   const deleteThisIssue = () => {
     if (window.confirm('Delete issue?')) { deleteIssue(issueObj?.issueId).then(() => onUpdate()); }
   };
+  console.log(issueObj);
+
   return (
     <div>
       <MDBRow>
         <MDBCol sm="4">
           <MDBCard className="mb-4">
             <MDBCardBody>
-              <MDBCardTitle>Issue#: {issueObj?.issueId} <MDBBadge pill className="position-relative">{issueObj?.status}</MDBBadge></MDBCardTitle>
+              <MDBCardTitle>Issue#: {issueObj?.issueId} <MDBBadge pill className="position-relative">{issueObj?.status?.statusName}</MDBBadge></MDBCardTitle>
+
               <MDBCardText>
                 <p>Title: {issueObj?.title}</p>
               </MDBCardText>
@@ -42,6 +45,7 @@ IssueCard.propTypes = {
     issueId: PropTypes.number,
     title: PropTypes.string,
     status: PropTypes.string,
+    statusName: PropTypes.string,
     dateTimeCreated: PropTypes.instanceOf(Date),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,

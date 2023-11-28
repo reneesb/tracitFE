@@ -13,7 +13,7 @@ const createIssue = (payload) => new Promise((resolve, reject) => {
     .then(async (res) => {
       let data;
       if (res.ok) {
-        data = await res.json();
+        data = await res;
         resolve(data);
       }
     })
