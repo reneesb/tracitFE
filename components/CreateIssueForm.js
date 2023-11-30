@@ -1,29 +1,30 @@
 import PropTypes from 'prop-types';
-import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import React, { useCallback, useEffect, useState } from 'react';
+import { Button, Form, Container } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { createIssue, updateIssue } from '../api/IssueData';
 
-const initialState = {
-  title: '',
-  description: '',
-  status: 'New',
-};
+const statusList = [
+  { statusId: 1, statusName: 'New' },
+  { statusId: 2, statusName: 'In-Progress' },
+  { statusId: 3, statusName: 'Closed' },
+];
 
 function CreateIssueForm({ obj }) {
-  const [formData, setFormData] = useState([]);
+  const [formData, setFormData] = useState({ dateTimeCreated: new Date(), title: '', description: '' });
   const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = useCallback((e) => {
     e.preventDefault();
+    console.log(formData);
     if (obj?.issueId) {
-      updateIssue(obj?.issueId, formData).then(() => router.push('/issues/viewissues'));
+      updateIssue(obj?.issueId, formData).then(() => router.push('/issues/viewissues')).catch((err) => console.log(err));
     } else {
-      const payload = { ...formData, statusId: 1 };
+      const payload = { ...formData };
 
-      createIssue(payload).then(() => router.push('/issues/viewissues'));
+      createIssue(payload).then(() => router.push('/issues/viewissues')).catch((err) => console.log(err));
     }
-  };
+  }, [formData, obj?.issueId, router]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,44 +40,43 @@ function CreateIssueForm({ obj }) {
         ...prev,
         title: obj?.title,
         description: obj?.description,
-        statusId: obj?.statusId,
       }));
     }
   }, [obj]);
   return (
     <>
+      <Container>
+        <Form onSubmit={handleSubmit}>
+          <Form.Select name="statusId" onChange={handleChange} value={formData.statusId}>
+            {statusList.map((item) => <option key={item.statusName} value={item.statusName}>{item.statusName}</option>)}
+          </Form.Select>
 
-      <Form onSubmit={handleSubmit}>
-        <Form.Select aria-label="Default select example">
-          <option>Select Status</option>
-          <option value={formData?.status?.statusId}>1</option>
-          <option value={formData?.status?.statusId}>2</option>
-          <option value={formData?.status?.statusId}>3</option>
-        </Form.Select>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-          <Form.Label>Issue Title</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Issue Title"
-            name="title"
-            value={formData?.title}
-            onChange={handleChange}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            as="textarea"
-            rows={5}
-            placeholder="Description"
-            name="description"
-            value={formData?.description}
-            onChange={handleChange}
-          />
-        </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Issue Title</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="Enter Issue Title"
+              name="title"
+              value={formData?.title}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+            <Form.Label>Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={5}
+              placeholder="Description"
+              name="description"
+              value={formData?.description}
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Control type="hidden" value={formData?.dateTimeCreated === undefined ? new Date() : formData?.dateTimeCreated} name="Created" />
 
-        <Button type="submit">{obj?.issueId ? 'Update' : 'Create'} Issue</Button>
-      </Form>
+          <Button type="submit">{obj?.issueId ? 'Update' : 'Create'} Issue</Button>
+        </Form>
+      </Container>
     </>
   );
 }
@@ -87,11 +87,7 @@ CreateIssueForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     statusId: PropTypes.number,
-  }),
-};
-
-CreateIssueForm.defaultProps = {
-  obj: initialState,
+  }).isRequired,
 };
 
 export default CreateIssueForm;

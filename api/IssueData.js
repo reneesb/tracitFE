@@ -2,7 +2,7 @@ import { clientCredentials } from '../utils/client';
 
 // Create Issue
 const createIssue = (payload) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/api/issue`, {
+  fetch(`${clientCredentials.databaseURL}/api/issue?statusId=1`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

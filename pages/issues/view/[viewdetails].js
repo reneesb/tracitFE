@@ -11,6 +11,7 @@ import {
 } from 'mdb-react-ui-kit';
 import { useRouter } from 'next/router';
 import { getSingleIssue } from '../../../api/IssueData';
+import CommentCard from '../../../components/CommentCard';
 
 function ViewDetails() {
   const [viewDet, setViewDet] = useState([]);
@@ -42,6 +43,8 @@ function ViewDetails() {
         </MDBRow>
 
       </MDBContainer>
+      <hr />
+      <CommentCard />
 
     </div>
   );

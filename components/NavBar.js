@@ -15,7 +15,7 @@ export default function App() {
   const [openNav, setOpenNav] = useState(false);
 
   return (
-    <MDBNavbar expand="lg" light bgColor="light">
+    <MDBNavbar expand="lg" className="nav">
       <MDBContainer fluid>
         <MDBNavbarBrand href="/">TracIT</MDBNavbarBrand>
         <MDBNavbarToggler
