@@ -9,19 +9,21 @@ function ViewIssues() {
   const onUpdate = () => {
     getAllIssues().then(setIssues);
   };
-
   useEffect(() => {
     getAllIssues().then(setIssues);
   }, []);
+
   return (
     <div>
-      <Link href="/issues/new/NewIssue">
+      <Link href="/issues/new/NewIssue" passHref>
         <MDBBtn className="mt-5 mb-2">Create Issue</MDBBtn>
       </Link>
       {issues?.map((issue) => (
         <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
       ))}
+
     </div>
+
   );
 }
 

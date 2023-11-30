@@ -8,10 +8,10 @@ import {
   MDBCardText,
   MDBCardTitle,
   MDBBtn,
-  MDBTextArea,
 } from 'mdb-react-ui-kit';
 import { useRouter } from 'next/router';
 import { getSingleIssue } from '../../../api/IssueData';
+import CommentCard from '../../../components/CommentCard';
 
 function ViewDetails() {
   const [viewDet, setViewDet] = useState([]);
@@ -33,7 +33,7 @@ function ViewDetails() {
                 <MDBCardText>
                   <p>Issue Id: {viewDet?.issueId}</p>
                   <p>Created: {viewDet?.dateTimeCreated}</p>
-                  <p>Issue Status {viewDet?.status}</p>
+                  <p>Issue Status: {viewDet?.status?.statusId}</p>
                   <p>Description: {viewDet?.description}</p>
                 </MDBCardText>
                 <MDBBtn href={`/issues/edit/${viewDet.issueId}`}>Edit</MDBBtn>
@@ -41,13 +41,10 @@ function ViewDetails() {
             </MDBCard>
           </MDBCol>
         </MDBRow>
-        <MDBRow>
-          <h4 className="mt-5">Enter Comments</h4>
-          <MDBTextArea id="textAreaExample" rows={4} className="mt-5" />
-          <MDBBtn>Save</MDBBtn>
-        </MDBRow>
 
       </MDBContainer>
+      <hr />
+      <CommentCard />
 
     </div>
   );

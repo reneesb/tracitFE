@@ -7,7 +7,6 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBBtn,
-  MDBBadge,
   MDBCol,
 } from 'mdb-react-ui-kit';
 import { deleteIssue } from '../api/IssueData';
@@ -16,18 +15,20 @@ function IssueCard({ issueObj, onUpdate }) {
   const deleteThisIssue = () => {
     if (window.confirm('Delete issue?')) { deleteIssue(issueObj?.issueId).then(() => onUpdate()); }
   };
+
   return (
     <div>
       <MDBRow>
         <MDBCol sm="4">
           <MDBCard className="mb-4">
             <MDBCardBody>
-              <MDBCardTitle>Issue#: {issueObj?.issueId} <MDBBadge pill className="position-relative">{issueObj?.status}</MDBBadge></MDBCardTitle>
+              <MDBCardTitle>Issue#: {issueObj?.issueId} </MDBCardTitle>
+
               <MDBCardText>
                 <p>Title: {issueObj?.title}</p>
               </MDBCardText>
 
-              <MDBBtn href={`/issues/view/${issueObj.issueId}`}>View</MDBBtn> <MDBBtn color="link" onClick={deleteThisIssue}>Delete</MDBBtn>
+              <MDBBtn href={`/issues/view/${issueObj?.issueId}`}>View</MDBBtn> <MDBBtn color="link" onClick={deleteThisIssue}>Delete</MDBBtn>
 
             </MDBCardBody>
           </MDBCard>
@@ -42,6 +43,7 @@ IssueCard.propTypes = {
     issueId: PropTypes.number,
     title: PropTypes.string,
     status: PropTypes.string,
+    statusName: PropTypes.string,
     dateTimeCreated: PropTypes.instanceOf(Date),
   }).isRequired,
   onUpdate: PropTypes.func.isRequired,

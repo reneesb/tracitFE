@@ -52,7 +52,7 @@ export default function IssueTable({ issueObj }) {
             {issueObj?.dateTimeCreated}
           </td>
           <td>
-            <Link href={`/issues/edit/${issueObj.issueId}`}>
+            <Link href={`/issues/edit/${issueObj.issueId}`} passHref>
               <MDBBtn color="link" rounded size="sm">
                 Edit
               </MDBBtn>
