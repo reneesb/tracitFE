@@ -33,7 +33,7 @@ function ViewDetails() {
                 <MDBCardText>
                   <p>Issue Id: {viewDet?.issueId}</p>
                   <p>Created: {viewDet?.dateTimeCreated}</p>
-                  <p>Issue Status: {viewDet?.status?.statusName}</p>
+                  <p>Issue Status: {viewDet?.status?.statusId}</p>
                   <p>Description: {viewDet?.description}</p>
                 </MDBCardText>
                 <MDBBtn href={`/issues/edit/${viewDet.issueId}`}>Edit</MDBBtn>
