@@ -11,16 +11,17 @@ import {
 } from 'mdb-react-ui-kit';
 import { useRouter } from 'next/router';
 import { getSingleIssue } from '../../../api/IssueData';
-import CommentCard from '../../../components/CommentCard';
+// import CommentCard from '../../../components/CommentCard';
 
 function ViewDetails() {
-  const [viewDet, setViewDet] = useState([]);
+  const [details, setDetails] = useState([]);
   const router = useRouter();
   const { viewdetails } = router.query;
 
   useEffect(() => {
-    getSingleIssue(viewdetails).then(setViewDet);
-  }, []);
+    getSingleIssue(viewdetails).then(setDetails);
+    console.log(viewdetails);
+  }, [viewdetails]);
 
   return (
     <div>
@@ -29,24 +30,22 @@ function ViewDetails() {
           <MDBCol>
             <MDBCard className="w-75">
               <MDBCardBody>
-                <MDBCardTitle>Title: {viewDet?.title}</MDBCardTitle>
+                <MDBCardTitle>Title: {details?.title}</MDBCardTitle>
                 <MDBCardText>
-                  <p>Issue Id: {viewDet?.issueId}</p>
-                  <p>Created: {viewDet?.dateTimeCreated}</p>
-                  <p>Issue Status: {viewDet?.status?.statusId}</p>
-                  <p>Description: {viewDet?.description}</p>
+                  <p>Issue Id: {details?.issueId}</p>
+                  <p>Created: {details?.dateTimeCreated}</p>
+                  <p>Issue Status: {details?.issuestatuses !== undefined && details?.issuestatuses[0].status.statusName }</p>
+                  <p>Description: {details?.description}</p>
                 </MDBCardText>
-                <MDBBtn href={`/issues/edit/${viewDet.issueId}`}>Edit</MDBBtn>
+                <MDBBtn href={`/issues/edit/${details.issueId}`}>Edit</MDBBtn>
               </MDBCardBody>
             </MDBCard>
           </MDBCol>
         </MDBRow>
-
       </MDBContainer>
-      <hr />
-      <CommentCard />
 
     </div>
+
   );
 }
 
