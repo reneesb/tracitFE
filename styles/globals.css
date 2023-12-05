@@ -18,6 +18,13 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+.user-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  cursor: pointer;
+}
+
 
 
 

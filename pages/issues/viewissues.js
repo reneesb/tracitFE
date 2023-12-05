@@ -11,6 +11,7 @@ function ViewIssues() {
   };
   useEffect(() => {
     getAllIssues().then(setIssues);
+    console.log(issues);
   }, []);
 
   return (
@@ -20,8 +21,8 @@ function ViewIssues() {
       </Link>
       {issues?.map((issue) => (
         <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
-      ))}
 
+      ))}
     </div>
 
   );

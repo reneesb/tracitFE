@@ -3,12 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Container } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { createIssue, updateIssue } from '../api/IssueData';
-
-const statusList = [
-  { statusId: 1, statusName: 'New' },
-  { statusId: 2, statusName: 'In-Progress' },
-  { statusId: 3, statusName: 'Closed' },
-];
+import ButtonGroup from './ButtonGroup';
 
 function CreateIssueForm({ obj }) {
   const [formData, setFormData] = useState({ dateTimeCreated: new Date(), title: '', description: '' });
@@ -46,10 +41,8 @@ function CreateIssueForm({ obj }) {
   return (
     <>
       <Container>
+        <ButtonGroup currentStatus={1} />
         <Form onSubmit={handleSubmit}>
-          <Form.Select name="statusId" onChange={handleChange} value={formData.statusId}>
-            {statusList.map((item) => <option key={item.statusName} value={item.statusName}>{item.statusName}</option>)}
-          </Form.Select>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Issue Title</Form.Label>
@@ -87,6 +80,7 @@ CreateIssueForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     statusId: PropTypes.number,
+    // issuestatuses.statusId: PropTypes.number;
   }).isRequired,
 };
 
