@@ -33,6 +33,32 @@ const updateIssue = (issueId, payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// Update issuestatus(make entry into issuestatus join table)
+const updateIssueStatus = (issueId, payload) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/api/issue/`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(resolve)
+    .catch(reject);
+});
+
+// Update IssueUser
+const updateIssueUser = (issueId, payload) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/api/issueUser/${issueId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(resolve)
+    .catch(reject);
+});
+
 // Get all issues
 const getAllIssues = () => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/api/issue`, {
@@ -78,4 +104,6 @@ export {
   getAllIssues,
   deleteIssue,
   getSingleIssue,
+  updateIssueUser,
+  updateIssueStatus,
 };

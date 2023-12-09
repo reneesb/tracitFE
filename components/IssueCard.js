@@ -7,9 +7,9 @@ import {
   MDBCardTitle,
   MDBCardText,
   MDBBtn,
-  MDBBadge,
   MDBCol,
 } from 'mdb-react-ui-kit';
+import Button from '@mui/material/Button';
 import { deleteIssue } from '../api/IssueData';
 
 function IssueCard({ issueObj, onUpdate }) {
@@ -28,12 +28,13 @@ function IssueCard({ issueObj, onUpdate }) {
           <MDBCard className="mb-4">
             <MDBCardBody>
               <MDBCardTitle>Issue#: {issueObj?.issueId} </MDBCardTitle>
-              <MDBBadge> {issueObj.issuestatuses[0].status.statusName}</MDBBadge>
+              <p> {issueObj.issuestatuses[0].status.statusName}</p>
+              {/* {issueObj?.issuestatuses.map((issuestatus) => <span key={issuestatus.id}>{issuestatus.status.statusName}</span>)} */}
               <MDBCardText>
                 <p>Title: {issueObj?.title}  </p>
               </MDBCardText>
 
-              <MDBBtn href={`/issues/view/${issueObj?.issueId}`}>View</MDBBtn> <MDBBtn color="link" onClick={deleteThisIssue}>Delete</MDBBtn>
+              <Button href={`/issues/view/${issueObj?.issueId}`} variant="contained">View</Button> <MDBBtn color="link" onClick={deleteThisIssue}>Delete</MDBBtn>
 
             </MDBCardBody>
           </MDBCard>
