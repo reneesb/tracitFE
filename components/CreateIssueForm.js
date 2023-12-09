@@ -6,7 +6,10 @@ import { createIssue, updateIssue } from '../api/IssueData';
 import ButtonGroup from './ButtonGroup';
 
 function CreateIssueForm({ obj }) {
-  const [formData, setFormData] = useState({ dateTimeCreated: new Date(), title: '', description: '' });
+  const [formData, setFormData] = useState({
+    dateTimeCreated: new Date(), title: '', description: '', issueStatus: '',
+  });
+
   const router = useRouter();
 
   const handleSubmit = useCallback((e) => {
@@ -36,6 +39,7 @@ function CreateIssueForm({ obj }) {
         title: obj?.title,
         description: obj?.description,
       }));
+      // eslint-disable-next-line react/prop-types
     }
   }, [obj]);
   return (
@@ -80,7 +84,6 @@ CreateIssueForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     statusId: PropTypes.number,
-    // issuestatuses.statusId: PropTypes.number;
   }).isRequired,
 };
 

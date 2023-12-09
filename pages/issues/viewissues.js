@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MDBBtn } from 'mdb-react-ui-kit';
+import Button from '@mui/material/Button';
 import Link from 'next/link';
 import IssueCard from '../../components/IssueCard';
 import { getAllIssues } from '../../api/IssueData';
@@ -17,7 +17,7 @@ function ViewIssues() {
   return (
     <div>
       <Link href="/issues/new/NewIssue" passHref>
-        <MDBBtn className="mt-5 mb-2">Create Issue</MDBBtn>
+        <Button className="mt-5 mb-2" variant="contained">Create Issue</Button>
       </Link>
       {issues?.map((issue) => (
         <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
