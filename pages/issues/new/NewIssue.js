@@ -1,9 +1,10 @@
-import React from 'react';
-import CreateIssueForm from '../../../components/CreateIssueForm';
+import NewIssueForm from '../../../components/NewIssueForm';
 
 function NewIssue() {
   return (
-    <CreateIssueForm />
+    <div>
+      <NewIssueForm />
+    </div>
   );
 }
 

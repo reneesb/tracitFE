@@ -1,14 +1,54 @@
-import React from 'react';
-import { MDBBtn, MDBTextArea } from 'mdb-react-ui-kit';
-import Avatar from '@mui/material/Avatar';
+/* eslint-disable react/prop-types */
+import React, { useState, useEffect } from 'react';
+import { createIssueComment } from '../api/IssueData';
 
-function CommentCard() {
+// eslint-disable-next-line react/prop-types
+function CommentCard({ user, existingComments, issueId }) {
+  console.log('existingcomments:', existingComments);
+  const [comment, setComment] = useState('');
+  const [comments, setcomments] = useState([]);
+
+  const addNewComment = () => {
+    const payload = {
+
+      issueId: '',
+      commentText: '',
+      userId: '',
+
+      dateTimeCommentCreated: new Date(),
+
+    };
+    createIssueComment(issueId, payload);
+    setcomments(() => [...comments, payload]);
+  };
+
+  const onChangeHandler = (e) => {
+    setComment(e.target.value);
+  };
+
+  useEffect(() => {
+    setcomments(existingComments);
+  }, [existingComments]);
+
   return (
     <div className="main-container">
-      <div>
-        <h3 className="comment-header">Comment</h3>
-        <Avatar alt="Black Male" src="https://media.istockphoto.com/id/1405418742/photo/smiling-african-american-young-man-in-red-sweater-with-dreadlocks-looking-at-camera-with-arms.webp?b=1&s=170667a&w=0&k=20&c=gnKqG4RlS1eTpytLbszBGenNaXEoLW46HRmd4WsN5vc=" /> <MDBTextArea className="text-area-comment" />
-        <MDBBtn className="btn-comment">Submit</MDBBtn>
+      {comments !== undefined && comments.map((text) => (
+        <div className="comment-container">{text?.commentText}</div>
+      ))}
+      <div className="comment-container">
+        <div className="comment-flexbox">
+          <h2 className="comment-text">Comment</h2>
+          <textarea
+            id="text_comment"
+            value={comment}
+            onChange={onChangeHandler}
+            className="input-box"
+            placeholder="Type comment"
+          />
+          Author: {user?.fbUser.displayName}
+
+          <button onClick={addNewComment} className="comment-button" type="submit">Submit</button>
+        </div>
       </div>
 
     </div>

@@ -1,11 +1,9 @@
-import PropTypes from 'prop-types';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Button, Form, Container } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import { createIssue, updateIssue } from '../api/IssueData';
-import ButtonGroup from './ButtonGroup';
 
-function CreateIssueForm({ obj }) {
+function NewIssueForm({ obj }) {
   const [formData, setFormData] = useState({
     dateTimeCreated: new Date(), title: '', description: '', issueStatus: '',
   });
@@ -38,14 +36,12 @@ function CreateIssueForm({ obj }) {
         title: obj?.title,
         description: obj?.description,
       }));
-      // eslint-disable-next-line react/prop-types
     }
   }, [obj]);
 
   return (
     <>
       <Container>
-        <ButtonGroup issueId={obj?.issueId} issueStatus={obj.issuestatuses[0]?.statusId || 1} />
         <Form onSubmit={handleSubmit}>
 
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -78,16 +74,4 @@ function CreateIssueForm({ obj }) {
   );
 }
 
-CreateIssueForm.propTypes = {
-  obj: PropTypes.shape({
-    issueId: PropTypes.number,
-    title: PropTypes.string,
-    description: PropTypes.string,
-    statusId: PropTypes.number,
-    // eslint-disable-next-line react/forbid-prop-types
-    issuestatuses: PropTypes.array,
-    status: PropTypes.string,
-  }).isRequired,
-};
-
-export default CreateIssueForm;
+export default NewIssueForm;

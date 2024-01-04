@@ -29,11 +29,7 @@ function getStyles(name, personName, theme) {
   };
 }
 
-// eslint-disable-next-line react/prop-types
 export default function AssignUser({ issueUser, issueId, updateIssueUsers }) {
-  console.log('issueId', issueId);
-  console.log('issueUser', issueUser);
-
   const theme = useTheme();
   const [personName, setPersonName] = useState([]);
   const [users, setUsers] = useState([]);
@@ -41,13 +37,9 @@ export default function AssignUser({ issueUser, issueId, updateIssueUsers }) {
   const getAssignedUsers = () => {
     // eslint-disable-next-line react/destructuring-assignment
     const assignees = [];
-    // eslint-disable-next-line react/prop-types
     for (let i = 0; i < issueUser?.length; i++) {
-      console.log('i', i);
-      // eslint-disable-next-line react/prop-types
       assignees.push(issueUser[i]?.userId);
     }
-    console.log('assignees', assignees);
 
     setPersonName(assignees);
   };
@@ -69,7 +61,6 @@ export default function AssignUser({ issueUser, issueId, updateIssueUsers }) {
     setPersonName(
       assigneeVal,
     );
-    console.log('value', assigneeVal);
     if (assigneeVal.length > 0) {
       const assignees = [];
 
@@ -77,7 +68,6 @@ export default function AssignUser({ issueUser, issueId, updateIssueUsers }) {
         // eslint-disable-next-line object-shorthand
         assignees.push({ issueId: issueId, userId: assigneeVal[i] });
       }
-      console.log('assignees', assignees);
 
       await updateIssueUser(issueId, assignees).then(() => updateIssueUsers());
     }
@@ -95,6 +85,7 @@ export default function AssignUser({ issueUser, issueId, updateIssueUsers }) {
           onChange={handleChange}
           input={<OutlinedInput label="Name" />}
           MenuProps={MenuProps}
+          backgroundColor
         >
           {users.map((user) => (
             <MenuItem

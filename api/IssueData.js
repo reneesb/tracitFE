@@ -35,12 +35,12 @@ const updateIssue = (issueId, payload) => new Promise((resolve, reject) => {
 
 // Update issuestatus(make entry into issuestatus join table)
 const updateIssueStatus = (issueId, payload) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/api/issue/`, {
+  fetch(`${clientCredentials.databaseURL}/api/issueStatus`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify(payload),
+    body: JSON.stringify({ issueId, statusId: payload }),
   })
     .then(resolve)
     .catch(reject);
@@ -81,7 +81,9 @@ const getSingleIssue = (issueId) => new Promise((resolve, reject) => {
     },
   })
     .then((response) => response.json())
-    .then((data) => resolve((data)))
+    .then((data) => {
+      resolve((data));
+    })
     .catch(reject);
 });
 
@@ -98,6 +100,34 @@ const deleteIssue = (issueId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+// Get Issue Comments by Id
+const getSingleIssueComment = (issueId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/api/issuecomments/${issueId}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      resolve((data));
+    })
+    .catch(reject);
+});
+
+// Create issuecomments(make entry into issuecomments join table)
+const createIssueComment = (issueId, payload) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/api/issuecomments/${issueId}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then(resolve)
+    .catch(reject);
+});
+
 export {
   createIssue,
   updateIssue,
@@ -106,4 +136,6 @@ export {
   getSingleIssue,
   updateIssueUser,
   updateIssueStatus,
+  getSingleIssueComment,
+  createIssueComment,
 };
