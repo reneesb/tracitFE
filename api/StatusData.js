@@ -1,6 +1,6 @@
 import { clientCredentials } from '../utils/client';
 
-// Create Issue
+// Create Issue Status
 const createIssueStatus = (payload) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/api/issueStatus`, {
     method: 'POST',

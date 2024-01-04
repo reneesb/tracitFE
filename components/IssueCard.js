@@ -6,10 +6,10 @@ import {
   MDBCardBody,
   MDBCardTitle,
   MDBCardText,
-  MDBBtn,
   MDBCol,
 } from 'mdb-react-ui-kit';
 import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { deleteIssue } from '../api/IssueData';
 
 function IssueCard({ issueObj, onUpdate }) {
@@ -18,7 +18,6 @@ function IssueCard({ issueObj, onUpdate }) {
   };
 
   useEffect(() => {
-    console.log(issueObj);
   });
 
   return (
@@ -28,18 +27,18 @@ function IssueCard({ issueObj, onUpdate }) {
           <MDBCard className="mb-4">
             <MDBCardBody>
               <MDBCardTitle>Issue#: {issueObj?.issueId} </MDBCardTitle>
-              <p> {issueObj.issuestatuses[0].status.statusName}</p>
-              {/* {issueObj?.issuestatuses.map((issuestatus) => <span key={issuestatus.id}>{issuestatus.status.statusName}</span>)} */}
+              Status: {issueObj?.issuestatuses[0]?.status.statusName}
               <MDBCardText>
                 <p>Title: {issueObj?.title}  </p>
               </MDBCardText>
 
-              <Button href={`/issues/view/${issueObj?.issueId}`} variant="contained">View</Button> <MDBBtn color="link" onClick={deleteThisIssue}>Delete</MDBBtn>
+              <Button href={`/issues/view/${issueObj?.issueId}`} variant="contained">View</Button> <DeleteIcon className="delete-icon" color="secondary" onClick={deleteThisIssue} />
 
             </MDBCardBody>
           </MDBCard>
         </MDBCol>
       </MDBRow>
+
     </div>
   );
 }

@@ -17,9 +17,10 @@ function Signin() {
         paddingBlock: '0 5rem',
       }}
     >
-      <h1>Hi there!</h1>
+      <h1 style={{ color: '#8927E0' }}>TracIT</h1>
+      <h3 style={{ color: '#36c5f4' }}>Issue Management System</h3>
       <p>Click the button below to login!</p>
-      <Button type="button" size="lg" className="copy-btn" onClick={signIn}>
+      <Button type="button" size="lg" className="copy-btn" onClick={signIn} style={{ background: '#8927E0' }}>
         Sign In
       </Button>
     </div>

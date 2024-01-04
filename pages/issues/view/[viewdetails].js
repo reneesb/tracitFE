@@ -9,15 +9,33 @@ import {
   MDBCardText,
   MDBCardTitle,
 } from 'mdb-react-ui-kit';
-import Button from '@mui/material/Button';
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@emotion/react';
+import EditIcon from '@mui/icons-material/Edit';
+import Fab from '@mui/material/Fab';
 import { useRouter } from 'next/router';
+import CommentCard from '../../../components/CommentCard';
 import { getSingleIssue } from '../../../api/IssueData';
 import AssignUser from '../../../components/AssignUser';
+import { useAuth } from '../../../utils/context/authContext';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#8927E0',
+    },
+    secondary: {
+      main: '#36c5f4',
+    },
+  },
+});
 
 function ViewDetails() {
   const [details, setDetails] = useState([]);
   const router = useRouter();
   const { viewdetails } = router.query;
+  const [IssueId, setIssueId] = useState(0);
+  const { user } = useAuth();
 
   const reloadAssignees = () => {
     getSingleIssue(viewdetails).then(setDetails);
@@ -25,31 +43,36 @@ function ViewDetails() {
 
   useEffect(() => {
     getSingleIssue(viewdetails).then(setDetails);
-    console.log(viewdetails);
+    setIssueId(details?.issueId);
   }, [viewdetails]);
+
   return (
     <div>
-      <MDBContainer>
-        <MDBRow>
-          <MDBCol>
-            <MDBCard className="w-75">
-              <MDBCardBody>
-                <MDBCardTitle>Title: {details?.title}</MDBCardTitle>
-                <MDBCardText>
-                  <p>Issue Id: {details?.issueId}</p>
-                  <p>Created: {details?.dateTimeCreated}</p>
-                  <p>Issue Status: {details?.issuestatuses !== undefined && details?.issuestatuses[0].status.statusName }</p>
-                  Assigned User: {details?.issueUser?.map((user) => <span key="user.id"> {user.user.firstName}, </span>)}
+      <ThemeProvider theme={theme}>
+        <MDBContainer>
+          <MDBRow>
+            <MDBCol>
+              <MDBCard className="w-75" id="border">
+                <MDBCardBody>
+                  <MDBCardTitle>Title: {details?.title}</MDBCardTitle>
+                  <MDBCardText>
+                    <p>Issue Id: {details?.issueId}</p>
+                    <p>Created: {details?.dateTimeCreated}</p>
+                    <p>Issue Status: {details?.issuestatuses !== undefined && details?.issuestatuses[0]?.status.statusName }</p>
+                    Assigned User: {details?.issueUser?.map((assignee) => <span key={assignee.id}> {assignee.user.firstName}, </span>)}
 
-                  <p>Description: {details?.description}</p>
-                </MDBCardText>
-                <Button href={`/issues/edit/${details.issueId}`} variant="contained">Edit</Button>
-                <AssignUser issueUser={details?.issueUser !== undefined && details?.issueUser} issueId={details?.issueId} updateIssueUsers={reloadAssignees} />
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+                    <p>Description: {details?.description}</p>
+                  </MDBCardText>
+                  <Fab href={`/issues/edit/${details?.issueId}`} variant="contained" color="primary"><EditIcon /></Fab>
+                  <AssignUser issueUser={details?.issueUser !== undefined && details?.issueUser} issueId={details?.issueId} updateIssueUsers={reloadAssignees} />
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
+        </MDBContainer>
+        <hr />
+        <CommentCard user={user} existingComments={details?.issueComments} issueId={IssueId} />
+      </ThemeProvider>
 
     </div>
 

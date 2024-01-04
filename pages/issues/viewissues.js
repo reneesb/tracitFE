@@ -1,8 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import Button from '@mui/material/Button';
 import Link from 'next/link';
+import { createTheme } from '@mui/material/styles';
+import { ThemeProvider } from '@emotion/react';
 import IssueCard from '../../components/IssueCard';
 import { getAllIssues } from '../../api/IssueData';
+import CreateButton from '../../components/CreateButton';
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#8927E0',
+    },
+    secondary: {
+      main: '#36c5f4',
+    },
+  },
+});
 
 function ViewIssues() {
   const [issues, setIssues] = useState([]);
@@ -11,20 +24,26 @@ function ViewIssues() {
   };
   useEffect(() => {
     getAllIssues().then(setIssues);
-    console.log(issues);
   }, []);
 
   return (
-    <div>
-      <Link href="/issues/new/NewIssue" passHref>
-        <Button className="mt-5 mb-2" variant="contained">Create Issue</Button>
-      </Link>
-      {issues?.map((issue) => (
-        <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
+    <>
+      <ThemeProvider theme={theme}>
+        <container>
+          <h2 className="issuepage-header" style={{ color: '#8927E0' }}>TracIT Issue Tracker</h2>
+          <h3 className="issuepage-header">List View</h3>
 
-      ))}
-    </div>
-
+        </container>
+        <div>
+          <Link href="/issues/new/NewIssue" passHref>
+            <CreateButton />
+          </Link>
+          {issues?.map((issue) => (
+            <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
+          ))}
+        </div>
+      </ThemeProvider>
+    </>
   );
 }
 

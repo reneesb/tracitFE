@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { MDBCol } from 'mdb-react-ui-kit';
-// import Form from 'react-bootstrap/Form';
 import { useRouter } from 'next/router';
 import CreateIssueForm from '../../../components/CreateIssueForm';
 import { getSingleIssue } from '../../../api/IssueData';
 
 function ViewSingleIssue() {
-  const [issue, setIssue] = useState([]);
+  const [issue, setIssue] = useState({});
   const router = useRouter();
   const { issueId } = router.query;
 
@@ -18,7 +17,7 @@ function ViewSingleIssue() {
     <>
       <div>
         <MDBCol>
-          <CreateIssueForm obj={issue} />
+          {Object.keys(issue).length > 0 && <CreateIssueForm obj={issue} />}
         </MDBCol>
       </div>
       {/* <div>

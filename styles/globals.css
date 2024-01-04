@@ -18,6 +18,28 @@ body {
   background-color: rgb(255, 255, 255);
 }
 
+.nav-end {
+ display: flex;
+ justify-content: end;
+}
+
+
+
+.signout-btn {
+  display: flex;
+  justify-items: flex-end;
+  background-color: #8927E0;
+  margin-left: 5px;
+}
+
+.splash {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+
+
 .user-card {
   display: flex;
   flex-direction: column;
@@ -34,6 +56,71 @@ body {
 
 }
 
+.issuepage-header {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-icon {
+  display: flex;
+  margin-left: 25px;
+}
+
+.main-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  margin-top: -600px;
+}
+
+.comment-flexbox {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.comment-text {
+  margin: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.input-box {
+  height: 75px;
+  width: 465px;
+  
+}
+
+.comment-button {
+  height: 40px;
+  width: 80px;
+  background-color: #8927E0;
+  color: white;
+  font-size: 1.05rem;
+  margin-top: 10px;
+  border-radius: 5px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.comment-container {
+  height: 75px;
+  width: 465px;
+  border-radius: 5px;
+  margin: 10px 0;
+  word-break: break-all;
+  background-color: rgb(241, 236, 243);
+}
+
+.kanban-card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.3);
+  text-align: start;
+  margin-top: 10px;
+}
+
+
+  
 
 
 

@@ -1,47 +1,35 @@
-import React, { useState } from 'react';
-import {
-  MDBContainer,
-  MDBNavbar,
-  MDBNavbarBrand,
-  MDBNavbarToggler,
-  MDBNavbarNav,
-  MDBNavbarItem,
-  MDBNavbarLink,
-  MDBCollapse,
-  MDBIcon,
-} from 'mdb-react-ui-kit';
+import { Button } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { signOut } from '../utils/auth';
+import { useAuth } from '../utils/context/authContext';
 
-export default function App() {
-  const [openNav, setOpenNav] = useState(false);
-
+function NavBar() {
+  const { user } = useAuth();
   return (
-    <MDBNavbar expand="lg" className="nav">
-      <MDBContainer fluid>
-        <MDBNavbarBrand href="/">TracIT</MDBNavbarBrand>
-        <MDBNavbarToggler
-          type="button"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-          onClick={() => setOpenNav(!openNav)}
-        >
-          <MDBIcon icon="bars" fas />
-        </MDBNavbarToggler>
-        <MDBCollapse navbar open={openNav}>
-          <MDBNavbarNav>
-            <MDBNavbarItem>
-              <MDBNavbarLink active aria-current="page" href="/">
-                Home
-              </MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="/issues/viewissues">Issues</MDBNavbarLink>
-            </MDBNavbarItem>
-            <MDBNavbarItem>
-              <MDBNavbarLink href="/projectteam">Project Team</MDBNavbarLink>
-            </MDBNavbarItem>
-          </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBContainer>
-    </MDBNavbar>
+    <Navbar className="nav">
+      <Container>
+        <Navbar.Brand href="/" style={{ color: '#8927E0' }}>TracIT</Navbar.Brand>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav.Link href="/">Home</Nav.Link>
+          <Nav.Link href="/issues/viewissues">Issues</Nav.Link>
+          <Nav.Link href="/issues/viewboard">View Board</Nav.Link>
+          <Nav.Link href="/projectteam">Project Team</Nav.Link>
+          <div className="nav-end">
+            <Navbar.Text>
+              Signed in as: {user.fbUser.displayName}
+            </Navbar.Text>
+
+            <Navbar.Text>
+              <Button onClick={signOut} className="signout-btn" style={{ backgroundColor: '#8927E0' }}>Sign Out</Button>
+            </Navbar.Text>
+          </div>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }
+
+export default NavBar;
