@@ -14,10 +14,8 @@ import { ThemeProvider } from '@emotion/react';
 import EditIcon from '@mui/icons-material/Edit';
 import Fab from '@mui/material/Fab';
 import { useRouter } from 'next/router';
-import CommentCard from '../../../components/CommentCard';
 import { getSingleIssue } from '../../../api/IssueData';
 import AssignUser from '../../../components/AssignUser';
-import { useAuth } from '../../../utils/context/authContext';
 
 const theme = createTheme({
   palette: {
@@ -34,8 +32,7 @@ function ViewDetails() {
   const [details, setDetails] = useState([]);
   const router = useRouter();
   const { viewdetails } = router.query;
-  const [IssueId, setIssueId] = useState(0);
-  const { user } = useAuth();
+  const [, setIssueId] = useState(0);
 
   const reloadAssignees = () => {
     getSingleIssue(viewdetails).then(setDetails);
@@ -71,7 +68,6 @@ function ViewDetails() {
           </MDBRow>
         </MDBContainer>
         <hr />
-        <CommentCard user={user} existingComments={details?.issueComments} issueId={IssueId} />
       </ThemeProvider>
 
     </div>

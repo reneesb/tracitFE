@@ -10,11 +10,14 @@ function ProjectTeam() {
   }, []);
 
   return (
-    <div>
-      {users.map((user) => (
-        <UserCard key={user?.uid} userObj={user} />
-      ))}
-    </div>
+    <>
+      <div className="d-flex flex-wrap">
+        {users.map((user) => (
+          <UserCard key={user?.uid} userObj={user} />
+        ))}
+
+      </div>
+    </>
   );
 }
 
