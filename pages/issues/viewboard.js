@@ -1,8 +1,10 @@
-import IssueBoard from '../../components/IssueBoard';
+import KanBan from '../../components/KanBan';
 
 function viewboard() {
   return (
-    <IssueBoard />
+    <div>
+      <KanBan />
+    </div>
   );
 }
 

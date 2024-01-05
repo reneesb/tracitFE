@@ -7,7 +7,6 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import { faComments } from '@fortawesome/free-regular-svg-icons';
 import { faMobileScreen } from '@fortawesome/free-solid-svg-icons';
 import { signOut } from '../utils/auth';
-// import { useAuth } from '../utils/context/authContext';
 
 function Home() {
   // const { user } = useAuth();

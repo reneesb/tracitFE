@@ -11,11 +11,11 @@ function NavBar() {
     <Navbar className="nav">
       <Container>
         <Navbar.Brand href="/" style={{ color: '#8927E0' }}>TracIT</Navbar.Brand>
-        <Navbar.Toggle />
+        {/* <Navbar.Toggle /> */}
         <Navbar.Collapse>
           <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/issues/viewissues">Issues</Nav.Link>
-          <Nav.Link href="/issues/viewboard">View Board</Nav.Link>
+          <Nav.Link href="/issues/viewissues">List View</Nav.Link>
+          <Nav.Link href="/issues/viewboard">Board View</Nav.Link>
           <Nav.Link href="/projectteam">Project Team</Nav.Link>
           <div className="nav-end">
             <Navbar.Text>

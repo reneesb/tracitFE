@@ -38,9 +38,12 @@ function ViewIssues() {
           <Link href="/issues/new/NewIssue" passHref>
             <CreateButton />
           </Link>
-          {issues?.map((issue) => (
-            <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
-          ))}
+          <div className="d-flex flex-wrap">
+            {issues?.map((issue) => (
+              <IssueCard key={issue.issueId} issueObj={issue} onUpdate={onUpdate} />
+            ))}
+
+          </div>
         </div>
       </ThemeProvider>
     </>
